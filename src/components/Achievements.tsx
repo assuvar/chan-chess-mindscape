@@ -119,7 +119,7 @@ const Achievements = () => {
   return (
     <section ref={sectionRef} className="h-screen relative overflow-hidden bg-gradient-to-b from-card to-background">
       {/* Dark Chessboard Background */}
-      <ChessboardPattern variant="dark" opacity={0.15} />
+      <ChessboardPattern opacity={0.08} />
       
       {/* Floating Chess Pieces */}
       <FloatingChessPieces />

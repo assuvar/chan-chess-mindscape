@@ -165,7 +165,7 @@ const Reviews = () => {
   return (
     <section ref={sectionRef} className="relative py-32 overflow-hidden">
       {/* Chessboard Background Pattern */}
-      <ChessboardPattern variant="light" opacity={0.08} />
+      <ChessboardPattern opacity={0.08} />
       
       <div className="container px-4 relative z-10">
         <div className="text-center mb-20" data-aos="fade-up">

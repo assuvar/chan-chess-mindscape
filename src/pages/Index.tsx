@@ -4,8 +4,8 @@ import 'aos/dist/aos.css';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import Programs from '@/components/Programs';
-import Reviews from '@/components/Reviews';
-import Achievements from '@/components/Achievements';
+import ReviewsChess from '@/components/ReviewsChess';
+import AchievementsScroll from '@/components/AchievementsScroll';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -19,12 +19,12 @@ const Index = () => {
   }, []);
 
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden bg-white">
       <Hero />
       <Features />
       <Programs />
-      <Reviews />
-      <Achievements />
+      <ReviewsChess />
+      <AchievementsScroll />
       <Contact />
       <Footer />
     </main>

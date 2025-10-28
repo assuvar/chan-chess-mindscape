@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, MessageCircle, Facebook, Twitter, Instagram } from
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 bg-secondary/30">
+    <section id="contact" className="py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="container px-4">
         <div className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
