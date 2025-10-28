@@ -4,6 +4,8 @@ import 'aos/dist/aos.css';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import Programs from '@/components/Programs';
+import Reviews from '@/components/Reviews';
+import Achievements from '@/components/Achievements';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -21,6 +23,8 @@ const Index = () => {
       <Hero />
       <Features />
       <Programs />
+      <Reviews />
+      <Achievements />
       <Contact />
       <Footer />
     </main>
