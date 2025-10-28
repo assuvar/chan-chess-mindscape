@@ -49,8 +49,10 @@ const Navbar = () => {
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo & Brand */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg transition-transform group-hover:scale-110">
-            C
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 group-hover:rotate-12">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-primary-foreground">
+              <path d="M17,14H19V17H22V19H19V22H17V19H14V17H17V14M12,2L16,6H13V9H11V6H8L12,2M12,22L8,18H11V15H13V18H16L12,22M2,12L6,8V11H9V13H6V16L2,12M18,13V11H15V9H18V6L22,12L18,16V13Z" />
+            </svg>
           </div>
           <span className="font-bold text-lg hidden sm:inline-block bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
             CHAN CHESS CLUB
