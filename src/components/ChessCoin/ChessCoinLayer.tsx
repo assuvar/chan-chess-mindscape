@@ -3,7 +3,7 @@ import { useScroll, useTransform } from 'framer-motion';
 import ChessCoin, { ChessCoinProps } from './ChessCoin';
 import coinsConfig from './coins.config.json';
 
-export type SectionType = 'hero' | 'programs' | 'testimonials' | 'achievements';
+export type SectionType = 'hero' | 'programs' | 'testimonials' | 'achievements' | 'features' | 'footer';
 
 interface ChessCoinLayerProps {
   section: SectionType;

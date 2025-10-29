@@ -99,10 +99,37 @@ All colors MUST be HSL.
     perspective: 1000px;
   }
 
-  .backface-hidden {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Chess coin metallic effects */
+.chess-coin {
+  transition: filter 0.3s ease;
+}
+
+.chess-coin:hover {
+  filter: brightness(1.15) drop-shadow(0 8px 16px rgba(139, 92, 246, 0.25));
+}
+
+/* Smooth shine animation */
+@keyframes shine-sweep {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
   }
+  100% {
+    transform: translateX(200%) rotate(45deg);
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .chess-coin {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 
   html {
     scroll-behavior: smooth;

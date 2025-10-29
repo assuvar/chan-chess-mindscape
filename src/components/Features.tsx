@@ -3,6 +3,7 @@ import { Award, Users, Target, Trophy } from 'lucide-react';
 import { Card } from './ui/card';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ChessCoinLayer from './ChessCoin/ChessCoinLayer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,8 +52,9 @@ const Features = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white">
-      <div className="container px-4">
+    <section ref={sectionRef} className="py-24 bg-white relative overflow-hidden">
+      <ChessCoinLayer section="features" />
+      <div className="container px-4 relative z-10">
         <div className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
             Why Choose Chan Chess Club?

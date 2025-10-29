@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 export type ChessPieceType = 'king' | 'queen' | 'rook' | 'bishop' | 'knight' | 'pawn';
 
@@ -27,6 +27,7 @@ const ChessCoin = ({
   className = '',
 }: ChessCoinProps) => {
   const prefersReducedMotion = useReducedMotion();
+  const [isHovered, setIsHovered] = useState(false);
 
   // Calculate parallax offset based on depth
   const parallaxMultiplier = useMemo(() => {
@@ -47,20 +48,20 @@ const ChessCoin = ({
   // Bobbing duration based on depth
   const bobbingDuration = depth === -2 ? 12 : depth === -1 ? 9 : 7;
 
-  // Color based on brand palette
-  const colorClass = useMemo(() => {
-    const colors = [
-      'text-primary/80',
-      'text-foreground/70',
-      'text-purple-600/75',
-      'text-gray-800/65',
+  // Metallic color variations
+  const colorStyle = useMemo(() => {
+    const variations = [
+      { filter: 'brightness(1.05) contrast(1.1)' },
+      { filter: 'brightness(0.98) contrast(1.15) hue-rotate(260deg)' }, // purple tint
+      { filter: 'brightness(1.02) contrast(1.08)' },
+      { filter: 'brightness(0.95) contrast(1.12)' },
     ];
-    return colors[Math.floor(Math.random() * colors.length)];
+    return variations[Math.floor(Math.random() * variations.length)];
   }, []);
 
   return (
     <motion.div
-      className={`absolute ${colorClass} ${className}`}
+      className={`absolute ${className} chess-coin`}
       style={{
         left: `${x}%`,
         top: `${y}%`,
@@ -69,7 +70,10 @@ const ChessCoin = ({
         pointerEvents,
         willChange: 'transform',
         zIndex: depth === -2 ? -2 : depth === -1 ? -1 : 0,
+        ...colorStyle,
       }}
+      onHoverStart={() => !prefersReducedMotion && setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
       initial={{ opacity: 0, scale: 0.98 }}
       animate={
         prefersReducedMotion
@@ -99,27 +103,45 @@ const ChessCoin = ({
       whileHover={
         isInteractive && !prefersReducedMotion
           ? {
-              scale: 1.06,
-              rotate: rotation + (Math.random() > 0.5 ? 5 : -5),
-              y: parallaxY - 4,
+              scale: 1.08,
+              rotate: rotation + (Math.random() > 0.5 ? 8 : -8),
+              y: parallaxY - 6,
+              rotateY: 15,
+              transition: { duration: 0.3, ease: 'easeOut' }
             }
           : undefined
       }
       whileTap={
         isInteractive && !prefersReducedMotion
-          ? { scale: 0.98 }
+          ? { scale: 0.96, transition: { duration: 0.1 } }
           : undefined
       }
       aria-hidden="true"
     >
-      <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 64 64"
-        className="drop-shadow-sm"
-      >
-        <use href={`/chess-sprite.svg#chess-${type}`} />
-      </svg>
+      <div className="relative w-full h-full">
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          className="drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
+          style={{
+            filter: `drop-shadow(0 2px 8px rgba(139, 92, 246, ${isHovered ? 0.3 : 0.1}))`
+          }}
+        >
+          <use href={`/chess-sprite.svg#chess-${type}`} />
+        </svg>
+        
+        {/* Metallic shine effect on hover */}
+        {isHovered && !prefersReducedMotion && (
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent rounded-full pointer-events-none"
+            initial={{ opacity: 0, x: '-100%' }}
+            animate={{ opacity: [0, 1, 0], x: ['100%', '-100%'] }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            style={{ mixBlendMode: 'overlay' }}
+          />
+        )}
+      </div>
     </motion.div>
   );
 };

@@ -1,9 +1,11 @@
 import { Facebook, Twitter, Instagram } from 'lucide-react';
+import ChessCoinLayer from './ChessCoin/ChessCoinLayer';
 
 const Footer = () => {
   return (
-    <footer className="border-t bg-white">
-      <div className="container px-4 py-12">
+    <footer className="border-t bg-white relative overflow-hidden">
+      <ChessCoinLayer section="footer" />
+      <div className="container px-4 py-12 relative z-10">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <h3 className="text-xl font-bold mb-4">Chan Chess Club</h3>
