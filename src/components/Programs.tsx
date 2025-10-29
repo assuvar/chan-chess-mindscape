@@ -4,6 +4,7 @@ import { Card } from './ui/card';
 import { CheckCircle2 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ChessCoinLayer from './ChessCoin/ChessCoinLayer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,8 +66,9 @@ const Programs = () => {
   }, []);
 
   return (
-    <section id="programs" ref={sectionRef} className="py-24 bg-white">
-      <div className="container px-4">
+    <section id="programs" ref={sectionRef} className="py-24 bg-white relative overflow-hidden">
+      <ChessCoinLayer section="programs" />
+      <div className="container px-4 relative z-10">
         <div className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
             Our Programs

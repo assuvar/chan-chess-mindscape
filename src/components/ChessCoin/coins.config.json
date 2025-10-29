@@ -1,0 +1,202 @@
+[
+  {
+    "section": "hero",
+    "type": "king",
+    "size": 180,
+    "x": 8,
+    "y": 12,
+    "opacity": 0.08,
+    "rotation": -6,
+    "depth": -2
+  },
+  {
+    "section": "hero",
+    "type": "queen",
+    "size": 160,
+    "x": 88,
+    "y": 18,
+    "opacity": 0.07,
+    "rotation": 12,
+    "depth": -2
+  },
+  {
+    "section": "hero",
+    "type": "knight",
+    "size": 100,
+    "x": 15,
+    "y": 65,
+    "opacity": 0.12,
+    "rotation": -8,
+    "depth": -1
+  },
+  {
+    "section": "hero",
+    "type": "bishop",
+    "size": 90,
+    "x": 82,
+    "y": 72,
+    "opacity": 0.14,
+    "rotation": 5,
+    "depth": -1
+  },
+  {
+    "section": "hero",
+    "type": "pawn",
+    "size": 48,
+    "x": 92,
+    "y": 45,
+    "opacity": 0.16,
+    "rotation": -3,
+    "depth": 0
+  },
+  {
+    "section": "hero",
+    "type": "rook",
+    "size": 64,
+    "x": 6,
+    "y": 88,
+    "opacity": 0.15,
+    "rotation": 8,
+    "depth": 0
+  },
+  {
+    "section": "programs",
+    "type": "queen",
+    "size": 140,
+    "x": 10,
+    "y": 8,
+    "opacity": 0.08,
+    "rotation": -10,
+    "depth": -2
+  },
+  {
+    "section": "programs",
+    "type": "rook",
+    "size": 120,
+    "x": 85,
+    "y": 15,
+    "opacity": 0.07,
+    "rotation": 14,
+    "depth": -2
+  },
+  {
+    "section": "programs",
+    "type": "knight",
+    "size": 86,
+    "x": 18,
+    "y": 75,
+    "opacity": 0.13,
+    "rotation": -5,
+    "depth": -1
+  },
+  {
+    "section": "programs",
+    "type": "pawn",
+    "size": 52,
+    "x": 90,
+    "y": 82,
+    "opacity": 0.16,
+    "rotation": 6,
+    "depth": 0
+  },
+  {
+    "section": "testimonials",
+    "type": "king",
+    "size": 200,
+    "x": 5,
+    "y": 10,
+    "opacity": 0.06,
+    "rotation": 8,
+    "depth": -2
+  },
+  {
+    "section": "testimonials",
+    "type": "bishop",
+    "size": 110,
+    "x": 88,
+    "y": 12,
+    "opacity": 0.09,
+    "rotation": -12,
+    "depth": -2
+  },
+  {
+    "section": "testimonials",
+    "type": "pawn",
+    "size": 72,
+    "x": 12,
+    "y": 68,
+    "opacity": 0.14,
+    "rotation": 4,
+    "depth": -1
+  },
+  {
+    "section": "testimonials",
+    "type": "knight",
+    "size": 94,
+    "x": 84,
+    "y": 78,
+    "opacity": 0.12,
+    "rotation": -7,
+    "depth": -1
+  },
+  {
+    "section": "testimonials",
+    "type": "rook",
+    "size": 56,
+    "x": 48,
+    "y": 92,
+    "opacity": 0.17,
+    "rotation": 2,
+    "depth": 0
+  },
+  {
+    "section": "achievements",
+    "type": "queen",
+    "size": 170,
+    "x": 92,
+    "y": 8,
+    "opacity": 0.07,
+    "rotation": -9,
+    "depth": -2
+  },
+  {
+    "section": "achievements",
+    "type": "rook",
+    "size": 130,
+    "x": 8,
+    "y": 14,
+    "opacity": 0.08,
+    "rotation": 11,
+    "depth": -2
+  },
+  {
+    "section": "achievements",
+    "type": "bishop",
+    "size": 88,
+    "x": 22,
+    "y": 70,
+    "opacity": 0.13,
+    "rotation": -6,
+    "depth": -1
+  },
+  {
+    "section": "achievements",
+    "type": "knight",
+    "size": 76,
+    "x": 86,
+    "y": 76,
+    "opacity": 0.14,
+    "rotation": 9,
+    "depth": -1
+  },
+  {
+    "section": "achievements",
+    "type": "pawn",
+    "size": 44,
+    "x": 94,
+    "y": 88,
+    "opacity": 0.18,
+    "rotation": -4,
+    "depth": 0
+  }
+]

@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import heroImage from '@/assets/hero-chess.jpg';
+import ChessCoinLayer from './ChessCoin/ChessCoinLayer';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -39,6 +40,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-20">
+      <ChessCoinLayer section="hero" />
       {/* Background Image with Parallax */}
       <div 
         ref={imageRef}

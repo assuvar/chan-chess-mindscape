@@ -3,6 +3,7 @@ import { Quote } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ChessboardPattern from './ChessboardPattern';
+import ChessCoinLayer from './ChessCoin/ChessCoinLayer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -183,6 +184,7 @@ const ReviewsChess = () => {
 
   return (
     <section ref={sectionRef} className="relative py-32 bg-white overflow-hidden">
+      <ChessCoinLayer section="testimonials" />
       {/* Subtle Chessboard Pattern */}
       <ChessboardPattern opacity={0.08} />
       
