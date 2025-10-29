@@ -3,11 +3,11 @@ import { Quote, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ChessboardPattern from './ChessboardPattern';
-import P1 from '@/assets/P1.jpg';
-import P2 from '@/assets/P2.jpg';
-import P3 from '@/assets/P3.jpg';
-import P4 from '@/assets/P4.jpg';
-import P5 from '@/assets/P5.jpg';
+import P1 from '@/assets/p1.jpg';
+import P2 from '@/assets/p2.jpg';
+import P3 from '@/assets/p3.jpg';
+import P4 from '@/assets/p4.jpg';
+import P5 from '@/assets/p5.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
