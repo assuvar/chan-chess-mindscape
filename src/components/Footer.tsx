@@ -1,14 +1,17 @@
 import { Facebook, Twitter, Instagram } from 'lucide-react';
-import ChessCoinLayer from './ChessCoin/ChessCoinLayer';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
   return (
     <footer className="border-t bg-white relative overflow-hidden">
-      <ChessCoinLayer section="footer" />
+      
       <div className="container px-4 py-12 relative z-10">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
-            <h3 className="text-xl font-bold mb-4">Chan Chess Club</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img src={logo} alt="Chan Chess Club logo" className="w-20 h-20 object-contain shadow" />
+              <h3 className="text-xl font-bold">Chan Chess Club</h3>
+            </div>
             <p className="text-sm text-muted-foreground mb-4">
               Shaping Global Thinkers Through Chess since 2021
             </p>

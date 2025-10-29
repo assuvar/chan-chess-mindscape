@@ -3,7 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Trophy } from 'lucide-react';
 import ChessboardPattern from './ChessboardPattern';
-import ChessCoinLayer from './ChessCoin/ChessCoinLayer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,7 +97,7 @@ const AchievementsScroll = () => {
 
   return (
     <section ref={sectionRef} className="h-screen relative overflow-hidden bg-white">
-      <ChessCoinLayer section="achievements" />
+      
       {/* Subtle Chessboard Pattern */}
       <ChessboardPattern opacity={0.06} />
 
