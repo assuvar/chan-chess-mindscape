@@ -7,6 +7,7 @@ import Programs from '@/components/Programs';
 import ReviewsChess from '@/components/ReviewsChess';
 import AchievementsCarousel from '@/components/AchievementsCarousel';
 import BookingForm from '@/components/BookingForm';
+import FAQSection from '@/components/FAQSection';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -27,6 +28,7 @@ const Index = () => {
       <ReviewsChess />
       <AchievementsCarousel />
       <BookingForm />
+      <FAQSection />
       <Contact />
       <Footer />
     </main>
