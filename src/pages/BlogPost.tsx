@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import Footer from '@/components/Footer';
 
 interface PostData {
   title: string;
@@ -20,32 +21,57 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: Load markdown file based on slug
-    // For now, showing placeholder
-    setPost({
-      title: 'How Chess Builds Concentration in Children',
-      date: '2025-10-27',
-      author: 'Chan Chess Club',
-      content: `## Introduction
+    const loadPost = async () => {
+      try {
+        const files = import.meta.glob('../../content/posts/*.md', { as: 'raw', eager: true }) as Record<string, string>;
+        // Find matching file by slug (filename without .md)
+        const entry = Object.entries(files).find(([path]) => {
+          const filename = path.split('/').pop() || '';
+          const s = filename.replace(/\.md$/, '');
+          return s === slug;
+        });
 
-Chess is more than just a game—it's a powerful tool for developing young minds. In this article, we explore how regular chess practice can significantly improve concentration and focus in children.
+        if (!entry) {
+          setPost(null);
+          setLoading(false);
+          return;
+        }
 
-## The Science Behind Chess and Focus
+        const raw = entry[1];
+        // Extract frontmatter and body
+        let fmBlock = '';
+        let body = raw;
+        const m = raw.match(/^---[\s\S]*?---/);
+        if (m) {
+          fmBlock = m[0];
+          body = raw.slice(m[0].length).trim();
+        }
 
-Research has shown that chess engages multiple areas of the brain simultaneously...
+        const get = (key: string) => {
+          const r = new RegExp(`^${key}:\\s*(.*)$`, 'mi');
+          const mm = fmBlock.match(r);
+          if (!mm) return '';
+          return mm[1].replace(/^"|"$/g, '').trim();
+        };
 
-## Benefits for Young Learners
+        const data: PostData = {
+          title: get('title') || 'Untitled',
+          date: get('date') || new Date().toISOString().slice(0, 10),
+          author: get('author') || 'Chan Chess Club',
+          coverImage: get('coverImage') || undefined,
+          readTime: get('readTime') || '5 min read',
+          content: body,
+        };
 
-1. **Enhanced Attention Span**: Chess requires sustained focus throughout the game
-2. **Pattern Recognition**: Players learn to identify and remember complex patterns
-3. **Strategic Planning**: Thinking several moves ahead develops long-term focus
+        setPost(data);
+      } catch (e) {
+        setPost(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-## Conclusion
-
-Starting chess at a young age can provide lifelong benefits in concentration and cognitive development.`,
-      readTime: '5 min read'
-    });
-    setLoading(false);
+    loadPost();
   }, [slug]);
 
   const handleShare = () => {
@@ -79,7 +105,7 @@ Starting chess at a young age can provide lifelong benefits in concentration and
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-28">
       {/* Header */}
       <div className="border-b bg-card">
         <div className="container px-4 py-6">
@@ -156,6 +182,7 @@ Starting chess at a young age can provide lifelong benefits in concentration and
           </div>
         </div>
       </article>
+      <Footer />
     </div>
   );
 };

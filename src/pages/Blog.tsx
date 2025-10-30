@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Footer from '@/components/Footer';
 
 interface BlogPost {
   slug: string;
@@ -24,21 +25,54 @@ const Blog = () => {
       once: true,
     });
 
-    // TODO: Load blog posts from markdown files
-    // For now, showing placeholder
-    setPosts([
-      {
-        slug: 'example-post',
-        title: 'How Chess Builds Concentration in Children',
-        date: '2025-10-27',
-        excerpt: 'Discover how regular chess practice can significantly improve focus and concentration in young learners...',
-        readTime: '5 min read'
-      }
-    ]);
+    // Load markdown posts from content/posts
+    const loadPosts = async () => {
+      const files = import.meta.glob('../../content/posts/*.md', { as: 'raw', eager: true }) as Record<string, string>;
+
+      const parsed: BlogPost[] = Object.entries(files).map(([path, raw]) => {
+        // Derive slug from filename: ../../content/posts/2025-10-27-chess-concentration.md -> 2025-10-27-chess-concentration
+        const filename = path.split('/').pop() || '';
+        const slug = filename.replace(/\.md$/, '');
+
+        // Basic frontmatter parsing: between first two '---' lines
+        let title = 'Untitled';
+        let date = '';
+        let excerpt = '';
+        let coverImage: string | undefined = undefined;
+        let readTime = '';
+
+        const fmMatch = raw.match(/^---[\s\S]*?---/);
+        if (fmMatch) {
+          const fm = fmMatch[0];
+          const get = (key: string) => {
+            const r = new RegExp(`^${key}:\\s*(.*)$`, 'mi');
+            const m = fm.match(r);
+            if (!m) return '';
+            return m[1].replace(/^"|"$/g, '').trim();
+          };
+          title = get('title') || title;
+          date = get('date') || date;
+          excerpt = get('excerpt') || excerpt;
+          const ci = get('coverImage');
+          coverImage = ci || undefined;
+          readTime = get('readTime') || readTime;
+        }
+
+        return { slug, title, date, excerpt, coverImage, readTime };
+      })
+      // Filter out entries missing required fields (optional)
+      .filter(p => p.title && p.date)
+      // Sort by date desc
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      setPosts(parsed);
+    };
+
+    loadPosts();
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-28">
       {/* Header */}
       <div className="border-b bg-card">
         <div className="container px-4 py-6">
@@ -127,6 +161,7 @@ const Blog = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
