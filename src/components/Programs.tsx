@@ -115,7 +115,9 @@ const Programs = () => {
                       : ''
                   }`}
                   variant={program.highlight ? 'default' : 'outline'}
-                  onClick={() => window.open('https://wa.me/916379597908', '_blank')}
+                  onClick={() => {
+                    document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   Enroll Now
                 </Button>

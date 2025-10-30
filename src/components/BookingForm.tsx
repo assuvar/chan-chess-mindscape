@@ -18,9 +18,16 @@ const bookingSchema = z.object({
   name: z.string().trim().min(2, 'Name must be at least 2 characters').max(100, 'Name is too long'),
   city: z.string().trim().min(2, 'City must be at least 2 characters').max(100, 'City name is too long'),
   whatsappNumber: z.string().trim().min(10, 'Please enter a valid WhatsApp number').max(15, 'Number is too long'),
-  childDob: z.date({ required_error: 'Please select your child\'s date of birth' }),
+  childDob: z
+    .date({ required_error: 'Please select your child\'s date of birth' })
+    .refine((d) => {
+      const today = new Date();
+      const minDob = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
+      return d <= minDob;
+    }, 'Child must be at least 5 years old'),
   email: z.string().trim().email('Please enter a valid email address').max(255, 'Email is too long'),
-  device: z.enum(['Laptop', 'Desktop', 'Tablet', 'Smartphone'], { required_error: 'Please select a device' }),
+  chessLevel: z.enum(['Beginner', 'Intermediate', 'Advanced'], { required_error: 'Please select your current chess level' }),
+  goal: z.enum(['Learn Basics', 'Improve Skills', 'Tournament Prep'], { required_error: 'Please select a learning goal' }),
   language: z.enum(['English', 'Tamil', 'Both'], { required_error: 'Please select a language' }),
   termsAccepted: z.boolean().refine((val) => val === true, 'You must agree to the terms and conditions'),
 });
@@ -31,6 +38,8 @@ const BookingForm = () => {
   const [date, setDate] = useState<Date>();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const today = new Date();
+  const minDob = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
 
   const {
     register,
@@ -42,7 +51,8 @@ const BookingForm = () => {
     resolver: zodResolver(bookingSchema),
   });
 
-  const device = watch('device');
+  const chessLevel = watch('chessLevel');
+  const goal = watch('goal');
   const language = watch('language');
   const termsAccepted = watch('termsAccepted');
 
@@ -57,7 +67,8 @@ const BookingForm = () => {
 *WhatsApp Number:* ${data.whatsappNumber}
 *Child's Date of Birth:* ${format(data.childDob, 'PPP')}
 *Email:* ${data.email}
-*Device:* ${data.device}
+*Current Chess Level:* ${data.chessLevel}
+*Learning Goal:* ${data.goal}
 *Preferred Language:* ${data.language}
 
 Thank you for booking a demo with Chan Chess Club!`;
@@ -87,8 +98,8 @@ Thank you for booking a demo with Chan Chess Club!`;
       <div className="container px-4 relative z-10">
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4" style={{ color: '#FF6B35' }}>
-              Book Your Demo Now
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-primary">
+              Book a Demo
             </h2>
             <p className="text-lg text-muted-foreground">
               Fill in the details below and we'll get back to you on WhatsApp
@@ -167,13 +178,14 @@ Thank you for booking a demo with Chan Chess Club!`;
                     <Calendar
                       mode="single"
                       selected={date}
+                      defaultMonth={minDob}
                       onSelect={(selectedDate) => {
                         setDate(selectedDate);
                         if (selectedDate) {
                           setValue('childDob', selectedDate);
                         }
                       }}
-                      disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
+                      disabled={(date) => date > minDob || date < new Date('1900-01-01')}
                       initialFocus
                     />
                   </PopoverContent>
@@ -205,28 +217,24 @@ Thank you for booking a demo with Chan Chess Club!`;
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-3">
                 <Label className="text-base font-semibold">
-                  Your Device For Classes <span className="text-red-500">*</span>
+                  Current Chess Level <span className="text-red-500">*</span>
                 </Label>
-                <RadioGroup value={device} onValueChange={(value) => setValue('device', value as any)}>
+                <RadioGroup value={chessLevel} onValueChange={(value) => setValue('chessLevel', value as any)}>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Laptop" id="laptop" />
-                    <Label htmlFor="laptop" className="font-normal cursor-pointer">Laptop</Label>
+                    <RadioGroupItem value="Beginner" id="level-beginner" />
+                    <Label htmlFor="level-beginner" className="font-normal cursor-pointer">Beginner</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Desktop" id="desktop" />
-                    <Label htmlFor="desktop" className="font-normal cursor-pointer">Desktop</Label>
+                    <RadioGroupItem value="Intermediate" id="level-intermediate" />
+                    <Label htmlFor="level-intermediate" className="font-normal cursor-pointer">Intermediate</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Tablet" id="tablet" />
-                    <Label htmlFor="tablet" className="font-normal cursor-pointer">Tablet</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Smartphone" id="smartphone" />
-                    <Label htmlFor="smartphone" className="font-normal cursor-pointer">Smartphone</Label>
+                    <RadioGroupItem value="Advanced" id="level-advanced" />
+                    <Label htmlFor="level-advanced" className="font-normal cursor-pointer">Advanced</Label>
                   </div>
                 </RadioGroup>
-                {errors.device && (
-                  <p className="text-sm text-destructive">{errors.device.message}</p>
+                {errors.chessLevel && (
+                  <p className="text-sm text-destructive">{errors.chessLevel.message}</p>
                 )}
               </div>
 
@@ -250,6 +258,32 @@ Thank you for booking a demo with Chan Chess Club!`;
                 </RadioGroup>
                 {errors.language && (
                   <p className="text-sm text-destructive">{errors.language.message}</p>
+                )}
+              </div>
+            </div>
+
+            {/* Row: Learning Goal */}
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <Label className="text-base font-semibold">
+                  Learning Goal <span className="text-red-500">*</span>
+                </Label>
+                <RadioGroup value={goal} onValueChange={(value) => setValue('goal', value as any)}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Learn Basics" id="goal-basics" />
+                    <Label htmlFor="goal-basics" className="font-normal cursor-pointer">Learn Basics</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Improve Skills" id="goal-improve" />
+                    <Label htmlFor="goal-improve" className="font-normal cursor-pointer">Improve Skills</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Tournament Prep" id="goal-tournament" />
+                    <Label htmlFor="goal-tournament" className="font-normal cursor-pointer">Tournament Prep</Label>
+                  </div>
+                </RadioGroup>
+                {errors.goal && (
+                  <p className="text-sm text-destructive">{errors.goal.message}</p>
                 )}
               </div>
             </div>
@@ -279,10 +313,9 @@ Thank you for booking a demo with Chan Chess Club!`;
               type="submit"
               size="lg"
               disabled={isSubmitting}
-              className="w-full md:w-auto px-12 h-14 text-base font-semibold"
-              style={{ backgroundColor: '#FF6B35', color: 'white' }}
+              className="w-full md:w-auto px-12 h-14 text-base font-semibold bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              {isSubmitting ? 'Submitting...' : 'Book Now'}
+              {isSubmitting ? 'Submitting...' : 'Book Demo'}
             </Button>
           </form>
         </div>

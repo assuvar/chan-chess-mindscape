@@ -37,6 +37,14 @@ const Navbar = () => {
     }
   };
 
+  const scrollToBooking = () => {
+    if (location.pathname !== '/') {
+      window.location.href = '/#booking';
+    } else {
+      document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav
       ref={navRef}
@@ -83,7 +91,7 @@ const Navbar = () => {
           <Button 
             size="sm"
             className="rounded-full bg-primary hover:shadow-lg hover:shadow-primary/50 transition-all duration-300"
-            onClick={() => window.open('https://wa.me/916379597908', '_blank')}
+            onClick={scrollToBooking}
           >
             Book Free Trial
           </Button>
@@ -129,7 +137,7 @@ const Navbar = () => {
               size="sm"
               className="rounded-full bg-primary hover:shadow-lg hover:shadow-primary/50 transition-all duration-300"
               onClick={() => {
-                window.open('https://wa.me/916379597908', '_blank');
+                scrollToBooking();
                 setIsMobileMenuOpen(false);
               }}
             >
