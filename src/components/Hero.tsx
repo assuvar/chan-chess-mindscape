@@ -55,7 +55,7 @@ const Hero = () => {
         <div className="mx-auto max-w-4xl space-y-8">
           <div className="animate-item">
             <span className="inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-              Est. 2021 • FIDE Rated Coaches
+              FIDE Rated Coaches
             </span>
           </div>
           
@@ -113,3 +113,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

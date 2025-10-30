@@ -13,7 +13,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold">Chan Chess Club</h3>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
-              Shaping Global Thinkers Through Chess since 2021
+              Shaping Global Thinkers Through Chess
             </p>
             <div className="flex gap-3">
               <a 
@@ -84,3 +84,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

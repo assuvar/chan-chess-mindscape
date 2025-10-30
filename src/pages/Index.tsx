@@ -5,7 +5,7 @@ import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import Programs from '@/components/Programs';
 import ReviewsChess from '@/components/ReviewsChess';
-import AchievementsScroll from '@/components/AchievementsScroll';
+import AchievementsCarousel from '@/components/AchievementsCarousel';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -24,7 +24,7 @@ const Index = () => {
       <Features />
       <Programs />
       <ReviewsChess />
-      <AchievementsScroll />
+      <AchievementsCarousel />
       <Contact />
       <Footer />
     </main>
