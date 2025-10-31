@@ -45,6 +45,22 @@ const Navbar = () => {
     }
   };
 
+  const scrollToPrograms = () => {
+    if (location.pathname !== '/') {
+      window.location.href = '/#programs';
+    } else {
+      document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToFaqs = () => {
+    if (location.pathname !== '/') {
+      window.location.href = '/#faqs';
+    } else {
+      document.getElementById('faqs')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav
       ref={navRef}
@@ -76,12 +92,24 @@ const Navbar = () => {
           >
             Home
           </Link>
+          <button 
+            onClick={scrollToPrograms}
+            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
+            Our Programs
+          </button>
           <Link 
             to="/blog" 
             className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
           >
             Blog
           </Link>
+          <button 
+            onClick={scrollToFaqs}
+            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
+            FAQs
+          </button>
           <button 
             onClick={scrollToContact}
             className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
@@ -117,6 +145,15 @@ const Navbar = () => {
             >
               Home
             </Link>
+            <button 
+              onClick={() => {
+                scrollToPrograms();
+                setIsMobileMenuOpen(false);
+              }}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 text-left"
+            >
+              Our Programs
+            </button>
             <Link 
               to="/blog" 
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2"
@@ -124,6 +161,15 @@ const Navbar = () => {
             >
               Blog
             </Link>
+            <button 
+              onClick={() => {
+                scrollToFaqs();
+                setIsMobileMenuOpen(false);
+              }}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 text-left"
+            >
+              FAQs
+            </button>
             <button 
               onClick={() => {
                 scrollToContact();

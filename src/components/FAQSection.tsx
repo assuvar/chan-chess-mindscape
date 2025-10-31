@@ -43,7 +43,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-20 px-4 bg-white">
+    <section id="faqs" className="py-20 px-4 bg-white">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12" data-aos="fade-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
